@@ -123,6 +123,6 @@ class GUI(Tk):
         print(frame)
 
 
-gui = GUI(600, 600, "#27252c", "Encrypt-decrypt")
+gui = GUI(600, 600, "#27252c", "Encrypt-decrypt application")
 gui.grid_columnconfigure(0, weight=1)
 gui.mainloop()
