@@ -12,13 +12,13 @@ def caesar_encrypt(text, shift):
                     a = 96
                 a += 1
             encrypted_text += chr(a)
-    print("##############HOTOVO##############")
+    """print("##############HOTOVO##############")
     print("Sifrace uspesne dokoncena!")
     print("Sila sifrovani je:", shift)
     print("Zasifrovany text:", encrypted_text)
     print("##################################")
 
-    """if save == "a":
+    if save == "a":
         file_name = input("Jak se tento textovy soubor ma jmenovat? (bez diakritiky, bez mezer, bez specialnich "
                           "znaku): ")
         file_name += ".txt"

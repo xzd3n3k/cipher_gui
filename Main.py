@@ -54,8 +54,6 @@ dropdown_menu3.place(x=105, y=130)
 def action():
     global plain_text_input
     global variable3
-    print(variable3)
-    print(plain_text_input)
     if variable.get() == CIPHERS[0]:
         caesar_encrypt(plain_text_input.get(), int(variable3.get()))
     elif variable.get() == CIPHERS[1]:
@@ -115,10 +113,34 @@ class BaseFrame(Frame):
 class CaesarFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
-        """self.shift_label = Label(self, text="Shift: ")
-        self.shift_entry = Entry(self)
-        self.shift_label.pack()
-        self.shift_entry.pack()"""
+
+        # Labels
+        self.shift = Label(self, text="Shift").place(x=30, y=130)
+
+        # Inputs
+
+        # OptionMenus
+        self.shifts = []
+
+        for x in range(25):
+            self.shifts.append(x + 1)
+
+        self.variable3 = StringVar(self)
+        self.variable3.set(self.shifts[0])
+
+        self.dropdown_menu3 = OptionMenu(self, self.variable3, *self.shifts)
+        self.dropdown_menu3.place(x=105, y=130)
+
+        # Whats executed when submit button is clicked
+        def action():
+            if self.variable.get() == self.CIPHERS[0]:
+                caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get()))
+            elif self.variable.get() == self.CIPHERS[1]:
+                caesar_decrypt()
+
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.place(x=260, y=330)
 
 
 def change_scene(frame_class):
@@ -126,7 +148,6 @@ def change_scene(frame_class):
     frame.grid(row=0, column=0, sticky="ew")
     frame.configure(bg="#27252c")
     frame.tkraise()
-    print(frame)
 
 
 class GUI(Tk):
