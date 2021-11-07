@@ -133,8 +133,22 @@ class CaesarFrame(BaseFrame):
 
         # Whats executed when submit button is clicked
         def action():
+
             if self.variable.get() == self.CIPHERS[0]:
-                caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get()))
+
+                try:
+                    self.decrypted.destroy()
+                    self.decrypted = Label(self,
+                                           text="Encrypted text: " + caesar_encrypt(self.plain_text_input.get(),
+                                                                                    int(self.variable3.get())))
+                    self.decrypted.place(relx=.5, rely=.8, anchor="c")
+
+                except:
+                    self.decrypted = Label(self,
+                                           text="Encrypted text: " + caesar_encrypt(self.plain_text_input.get(),
+                                                                                    int(self.variable3.get())))
+                    self.decrypted.place(relx=.5, rely=.8, anchor="c")
+
             elif self.variable.get() == self.CIPHERS[1]:
                 caesar_decrypt()
 
