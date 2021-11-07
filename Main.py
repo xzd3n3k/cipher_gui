@@ -141,13 +141,18 @@ class CaesarFrame(BaseFrame):
                     self.decrypted = Label(self,
                                            text="Encrypted text: " + caesar_encrypt(self.plain_text_input.get(),
                                                                                     int(self.variable3.get())))
-                    self.decrypted.place(relx=.5, rely=.8, anchor="c")
+                    self.decrypted.place(relx=.5, rely=.65, anchor="c")
 
                 except:
                     self.decrypted = Label(self,
                                            text="Encrypted text: " + caesar_encrypt(self.plain_text_input.get(),
                                                                                     int(self.variable3.get())))
-                    self.decrypted.place(relx=.5, rely=.8, anchor="c")
+                    self.decrypted.place(relx=.5, rely=.65, anchor="c")
+
+                if self.variable2.get() == self.choices[1]:
+                    self.file_name = self.file_name_input.get() + ".txt"
+                    with open(self.file_name, mode="w", encoding="utf-8") as file:
+                        file.write(caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get())))
 
             elif self.variable.get() == self.CIPHERS[1]:
                 caesar_decrypt()
