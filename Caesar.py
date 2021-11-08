@@ -21,8 +21,8 @@ def caesar_encrypt(text, shift):
 
 
 def caesar_decrypt(text, shift=0):
-    if os.path.exists("txt_files/ceska_slova_rozsireni.txt"):
-        os.remove("txt_files/ceska_slova_rozsireni.txt")
+    if os.path.exists("txt_files/dictionary_extension.txt"):
+        os.remove("txt_files/dictionary_extension.txt")
     else:
         pass
 
@@ -31,7 +31,7 @@ def caesar_decrypt(text, shift=0):
     with open("txt_files/ceska_slova_databaze.txt", mode="r", encoding="utf-8") as filedict:
         dictionary = filedict.read()
         dictionary = dictionary.split()
-        match=0
+        match = 0
         words_from_text = "ahoj"
 
         while match < len(words_from_text) * (1 / 4):
@@ -65,5 +65,19 @@ def caesar_decrypt(text, shift=0):
                 if a > 0:
                     match += 1
                     match_words.append(word)
+
+    extension = []
+
+    for word in words_from_text:
+        a = dictionary.count(word)
+
+        if a == 0 and len(word) > 2:
+            extension.append(word)
+
+    if len(extension) > 0:
+        with open("txt_files/dictionary_extension.txt", mode="w", encoding="utf-8") as file2:
+            for word in extension:
+                file2.write(word)
+                file2.write("\n")
 
     return decrypted_text
