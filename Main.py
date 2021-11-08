@@ -136,23 +136,21 @@ class CaesarFrame(BaseFrame):
 
             if self.variable.get() == self.CIPHERS[0]:
 
+                a = caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get()))
+
                 try:
                     self.decrypted.destroy()
-                    self.decrypted = Label(self,
-                                           text="Encrypted text: " + caesar_encrypt(self.plain_text_input.get(),
-                                                                                    int(self.variable3.get())))
+                    self.decrypted = Label(self, text="Encrypted text: " + a)
                     self.decrypted.place(relx=.5, rely=.65, anchor="c")
 
                 except:
-                    self.decrypted = Label(self,
-                                           text="Encrypted text: " + caesar_encrypt(self.plain_text_input.get(),
-                                                                                    int(self.variable3.get())))
+                    self.decrypted = Label(self, text="Encrypted text: " + a)
                     self.decrypted.place(relx=.5, rely=.65, anchor="c")
 
                 if self.variable2.get() == self.choices[1]:
                     self.file_name = self.file_name_input.get() + ".txt"
                     with open(self.file_name, mode="w", encoding="utf-8") as file:
-                        file.write(caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get())))
+                        file.write(a)
 
             elif self.variable.get() == self.CIPHERS[1]:
                 caesar_decrypt()
@@ -177,6 +175,7 @@ class GUI(Tk):
         self.configure(bg=bgc)
         self.resizable(False, False)
 
+        # Menu bar - About desc and Exit button
         self.menubar = Menu(self)
         self.appmenu = Menu(self.menubar, tearoff=0)
         self.appmenu.add_command(label="About")
@@ -185,6 +184,7 @@ class GUI(Tk):
         self.menubar.add_cascade(label="Application", menu=self.appmenu)
         self.configure(menu=self.menubar)
 
+        # Scene changing buttons
         self.caesar_button = Button(self, text="Caesar cipher", command=lambda: change_scene(
             CaesarFrame(self, 600))).grid(row=1, column=0)
         self.random_button = Button(self, text="Random cipher", command=lambda: change_scene(
