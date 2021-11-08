@@ -31,53 +31,39 @@ def caesar_decrypt(text, shift=0):
     with open("txt_files/ceska_slova_databaze.txt", mode="r", encoding="utf-8") as filedict:
         dictionary = filedict.read()
         dictionary = dictionary.split()
+        match=0
+        words_from_text = "ahoj"
 
-        shoda = 0
-        shodna_slova = []
-        shift += 1
-        desifrovany_text = ""
+        while match < len(words_from_text) * (1 / 4):
+            match = 0
+            match_words = []
+            shift += 1
+            decrypted_text = ""
 
-        for pismeno in text:
+            for letter in text:
 
-            if pismeno not in "abcdefghijklmnopqrstuvwxyz":
-                desifrovany_text += pismeno
+                if letter not in "abcdefghijklmnopqrstuvwxyz":
+                    decrypted_text += letter
 
-            else:
-                a = ord(pismeno)
-                temp = 122
+                else:
+                    a = ord(letter)
 
-                for x in range(shift):
+                    for x in range(shift):
 
-                    if a == temp:
-                        a = 96
-                    a += 1
-                desifrovany_text += chr(a)
+                        if a == 122:
+                            a = 96
+                        a += 1
 
-        slova_z_textu = re.findall(r'\w+', desifrovany_text)
+                    decrypted_text += chr(a)
 
-        for slovo in slova_z_textu:
+            words_from_text = re.findall(r'\w+', decrypted_text)
 
-            a = dictionary.count(slovo)
+            for word in words_from_text:
 
-            if a > 0:
-                shoda += 1
-                shodna_slova.append(slovo)
+                a = dictionary.count(word)
 
-                if shoda > len(slova_z_textu) * 1 / 4:
-                    print("Shoda se slovem/y", end=": ")
+                if a > 0:
+                    match += 1
+                    match_words.append(word)
 
-                    if len(shodna_slova) > 1:
-
-                        for x in range(len(shodna_slova)):
-                            if x == len(shodna_slova) - 1:
-                                print(shodna_slova[x], end=".")
-                            else:
-                                print(shodna_slova[x], end=", ")
-
-                    else:
-                        for shodne_slovo in shodna_slova:
-                            print(shodne_slovo, end=".")
-
-                    print("\n")
-                    print("Desifrovany text:", desifrovany_text)
-                    print("\n")
+    return decrypted_text
