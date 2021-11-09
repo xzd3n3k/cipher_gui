@@ -81,3 +81,31 @@ def caesar_decrypt(text, shift=0):
                 file2.write("\n")
 
     return decrypted_text
+
+
+def caesar_manual_decrypt(text, shift=0):
+    text = text.lower()
+    dec_opts = []
+
+    for y in range(25):
+        shift += 1
+        decrypted_text = ""
+
+        for letter in text:
+
+            if letter not in "abcdefghijklmnopqrstuvwxyz":
+                decrypted_text += letter
+
+            else:
+                a = ord(letter)
+
+                for x in range(shift):
+
+                    if a == 122:
+                        a = 96
+                    a += 1
+
+                decrypted_text += chr(a)
+        dec_opts.append(str(shift) + ": " + decrypted_text)
+
+    return dec_opts

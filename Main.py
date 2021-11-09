@@ -1,6 +1,17 @@
 # Imports
+import tkinter.messagebox
+
 from Caesar import *
 from tkinter import *
+from tkinter import messagebox
+
+
+class StartFrame(Frame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
+        self.root = root
+        Button(self, text="Caesar", command=lambda: self.root.change_scene(
+            CaesarFrame(root, 600))).grid(row=1, column=0)
 
 
 class BaseFrame(Frame):
@@ -109,12 +120,18 @@ class CaesarFrame(BaseFrame):
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.place(x=260, y=330)
 
+        def onclick():
+            tkinter.messagebox.showinfo("Full list", caesar_manual_decrypt(self.plain_text_input.get()))
 
-def change_scene(frame_class):
+        self.buton = Button(self, text="click", command=onclick)
+        self.buton.place(x=260, y=400)
+
+
+"""def change_scene(frame_class):
     frame = frame_class
     frame.grid(row=0, column=0, sticky="ew")
     frame.configure(bg="#27252c")
-    frame.tkraise()
+    frame.tkraise()"""
 
 
 class GUI(Tk):
@@ -124,6 +141,7 @@ class GUI(Tk):
         self.title(title)
         self.configure(bg=bgc)
         self.resizable(False, False)
+        self.change_scene(StartFrame(self, 600))
 
         # Menu bar - About desc and Exit button
         self.menubar = Menu(self)
@@ -135,10 +153,16 @@ class GUI(Tk):
         self.configure(menu=self.menubar)
 
         # Scene changing buttons
-        self.caesar_button = Button(self, text="Caesar cipher", command=lambda: change_scene(
+        """self.caesar_button = Button(self, text="Caesar cipher", command=lambda: change_scene(
             CaesarFrame(self, 600))).grid(row=1, column=0)
         self.random_button = Button(self, text="Random cipher", command=lambda: change_scene(
-            BaseFrame(self, 600))).grid(row=2, column=0)
+            BaseFrame(self, 600))).grid(row=2, column=0)"""
+
+    def change_scene(self, frame_class):
+        self.frame = frame_class
+        self.frame.grid(row=0, column=0, sticky="ew")
+        self.frame.configure(bg="#27252c")
+        self.frame.tkraise()
 
 
 gui = GUI(600, 600, "#27252c", "Encrypt-decrypt app")
