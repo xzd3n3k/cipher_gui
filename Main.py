@@ -10,10 +10,18 @@ class StartFrame(Frame):
         self.root = root
 
         # Buttons
-        Button(self, text="Caesar", command=lambda: self.root.change_scene(
-            CaesarFrame(root, 600))).place(relx=.5, rely=.04, anchor="c")
-        Button(self, text="Base", command=lambda: self.root.change_scene(
-            BaseFrame(root, 600))).place(relx=.5, rely=.09, anchor="c")
+        caesar_button = Button(self, text="Caesar", command=lambda: self.root.change_scene(
+            CaesarFrame(root, 600)))
+        caesar_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        caesar_button.configure(highlightbackground='#27252c')
+        caesar_button.place(relx=.5, rely=.04, anchor="c")
+
+        base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
+            BaseFrame(root, 600)))
+        base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        base_button.configure(highlightbackground='#27252c')
+        base_button.place(relx=.5, rely=.09, anchor="c")
+
         """empty = Button(self, text="Test", command=None)
         empty.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         empty.configure(highlightbackground='#27252c')
@@ -48,9 +56,13 @@ class BaseFrame(Frame):
         self.variable2.set(self.choices[0])
 
         self.dropdown_menu = OptionMenu(self, self.variable, *self.CIPHERS)
+        self.dropdown_menu.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu.configure(highlightbackground='#27252c')
         self.dropdown_menu.place(x=160, y=50)
 
         self.dropdown_menu2 = OptionMenu(self, self.variable2, *self.choices)
+        self.dropdown_menu2.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu2.configure(highlightbackground='#27252c')
         self.dropdown_menu2.place(x=229, y=170)
 
     def save(self, final_text):
@@ -77,6 +89,8 @@ class CaesarFrame(BaseFrame):
         self.variable3.set(self.shifts[0])
 
         self.dropdown_menu3 = OptionMenu(self, self.variable3, *self.shifts)
+        self.dropdown_menu3.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu3.configure(highlightbackground='#27252c')
         self.dropdown_menu3.place(x=105, y=130)
 
         # Whats executed when submit button is clicked
@@ -85,12 +99,14 @@ class CaesarFrame(BaseFrame):
             if self.variable.get() == self.CIPHERS[0]:
 
                 a = caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get()))
+
                 messagebox.showinfo(title="Encrypted text", message=a)
                 CaesarFrame.save(self, a)
 
             elif self.variable.get() == self.CIPHERS[1]:
 
                 a = caesar_decrypt(self.plain_text_input.get())
+
                 messagebox.showinfo(title="Decrypted text", message=a)
                 CaesarFrame.save(self, a)
 
@@ -108,6 +124,8 @@ class CaesarFrame(BaseFrame):
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
         self.submit_button.place(relx=.5, rely=.55, anchor="c")
 
 
