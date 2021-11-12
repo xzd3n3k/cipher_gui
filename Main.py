@@ -76,7 +76,7 @@ class CaesarFrame(BaseFrame):
         self.dropdown_menu3.place(x=105, y=130)
 
         # Whats executed when submit button is clicked
-        def action():  # Edit action efficiency, make 'a' variable for whole function and make one try except
+        def action():
 
             if self.variable.get() == self.CIPHERS[0]:
 
