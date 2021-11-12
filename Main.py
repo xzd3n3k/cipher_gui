@@ -14,6 +14,10 @@ class StartFrame(Frame):
             CaesarFrame(root, 600))).place(relx=.5, rely=.04, anchor="c")
         Button(self, text="Base", command=lambda: self.root.change_scene(
             BaseFrame(root, 600))).place(relx=.5, rely=.09, anchor="c")
+        """empty = Button(self, text="Test", command=None)
+        empty.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        empty.configure(highlightbackground='#27252c')
+        empty.place(relx=.5, rely=.14, anchor="c")"""
 
 
 class BaseFrame(Frame):
