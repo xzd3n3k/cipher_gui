@@ -1,12 +1,15 @@
 # Imports
 from Caesar import *
 from tkinter import *
+from tkinter import messagebox
 
 
 class StartFrame(Frame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
         self.root = root
+
+        # Buttons
         Button(self, text="Caesar", command=lambda: self.root.change_scene(
             CaesarFrame(root, 600))).place(relx=.5, rely=.04, anchor="c")
         Button(self, text="Base", command=lambda: self.root.change_scene(
@@ -46,6 +49,12 @@ class BaseFrame(Frame):
         self.dropdown_menu2 = OptionMenu(self, self.variable2, *self.choices)
         self.dropdown_menu2.place(x=229, y=170)
 
+    def save(self, final_text):
+        if self.variable2.get() == self.choices[1]:
+            file_name = self.file_name_input.get() + ".txt"
+            with open(file_name, mode="w", encoding="utf-8") as file:
+                file.write(final_text)
+
 
 class CaesarFrame(BaseFrame):
     def __init__(self, root, height):
@@ -53,8 +62,6 @@ class CaesarFrame(BaseFrame):
 
         # Labels
         self.shift = Label(self, text="Shift").place(x=30, y=130)
-
-        # Inputs
 
         # OptionMenus
         self.shifts = []
@@ -70,100 +77,34 @@ class CaesarFrame(BaseFrame):
 
         # Whats executed when submit button is clicked
         def action():  # Edit action efficiency, make 'a' variable for whole function and make one try except
-            # +make only one output Label
 
             if self.variable.get() == self.CIPHERS[0]:
 
                 a = caesar_encrypt(self.plain_text_input.get(), int(self.variable3.get()))
-
-                try:
-                    self.encrypted.destroy()
-                except:
-                    pass
-
-                try:
-                    self.decrypted.destroy()
-                except:
-                    pass
-
-                self.encrypted = Label(self, text="Encrypted text: " + a)
-                self.encrypted.place(relx=.5, rely=.65, anchor="c")
-
-                if self.variable2.get() == self.choices[1]:
-                    self.file_name = self.file_name_input.get() + ".txt"
-                    with open(self.file_name, mode="w", encoding="utf-8") as file:
-                        file.write(a)
+                messagebox.showinfo(title="Encrypted text", message=a)
+                CaesarFrame.save(self, a)
 
             elif self.variable.get() == self.CIPHERS[1]:
 
                 a = caesar_decrypt(self.plain_text_input.get())
-
-                try:
-                    self.encrypted.destroy()
-                except:
-                    pass
-
-                try:
-                    self.decrypted.destroy()
-                except:
-                    pass
-
-                self.decrypted = Label(self, text="Decrypted text: " + a)
-                self.decrypted.place(relx=.5, rely=.65, anchor="c")
-
-                if self.variable2.get() == self.choices[1]:
-                    self.file_name = self.file_name_input.get() + ".txt"
-                    with open(self.file_name, mode="w", encoding="utf-8") as file:
-                        file.write(a)
+                messagebox.showinfo(title="Decrypted text", message=a)
+                CaesarFrame.save(self, a)
 
             elif self.variable.get() == self.CIPHERS[2]:
 
                 a = caesar_manual_decrypt(self.plain_text_input.get())
                 afinal = ""
-                temp = 1
-
-                try:
-                    self.encrypted.destroy()
-                except:
-                    pass
-
-                try:
-                    self.decrypted.destroy()
-                except:
-                    pass
 
                 for word in a:
-
                     afinal += word
+                    afinal += 3*"\n"
 
-                    if temp == 25:
-                        afinal += ". "
-                    else:
-                        afinal += ", "
-
-                    if temp % 5 == 0:
-                        afinal += "\n"
-
-                    temp += 1
-
-                self.decrypted = Label(self, text="Decrypted text: " + afinal)
-                self.decrypted.place(relx=.5, rely=.65, anchor="c")
-
-                if self.variable2.get() == self.choices[1]:
-                    self.file_name = self.file_name_input.get() + ".txt"
-                    with open(self.file_name, mode="w", encoding="utf-8") as file:
-                        file.write(afinal)
+                messagebox.showinfo(title="Decrypted text", message=afinal)
+                CaesarFrame.save(self, afinal)
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.place(relx=.5, rely=.55, anchor="c")
-
-
-"""def change_scene(frame_class):
-    frame = frame_class
-    frame.grid(row=0, column=0, sticky="ew")
-    frame.configure(bg="#27252c")
-    frame.tkraise()"""
 
 
 class GUI(Tk):
@@ -183,12 +124,6 @@ class GUI(Tk):
         self.appmenu.add_command(label="Exit", command=self.quit)
         self.menubar.add_cascade(label="Application", menu=self.appmenu)
         self.configure(menu=self.menubar)
-
-        # Scene changing buttons
-        """self.caesar_button = Button(self, text="Caesar cipher", command=lambda: change_scene(
-            CaesarFrame(self, 600))).grid(row=1, column=0)
-        self.random_button = Button(self, text="Random cipher", command=lambda: change_scene(
-            BaseFrame(self, 600))).grid(row=2, column=0)"""
 
     def change_scene(self, frame_class):
         self.frame = frame_class
