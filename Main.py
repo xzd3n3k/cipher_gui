@@ -1,9 +1,6 @@
 # Imports
-import tkinter.messagebox
-
 from Caesar import *
 from tkinter import *
-from tkinter import messagebox
 
 
 class StartFrame(Frame):
@@ -11,7 +8,9 @@ class StartFrame(Frame):
         super().__init__(root, height=height)
         self.root = root
         Button(self, text="Caesar", command=lambda: self.root.change_scene(
-            CaesarFrame(root, 600))).grid(row=1, column=0)
+            CaesarFrame(root, 600))).place(relx=.5, rely=.04, anchor="c")
+        Button(self, text="Base", command=lambda: self.root.change_scene(
+            BaseFrame(root, 600))).place(relx=.5, rely=.09, anchor="c")
 
 
 class BaseFrame(Frame):
@@ -32,7 +31,7 @@ class BaseFrame(Frame):
         self.file_name_input.place(x=30, y=250)
 
         # OptionMenus
-        self.CIPHERS = ["Encrypt", "Decrypt"]
+        self.CIPHERS = ["Encrypt", "Decrypt", "Decrypt with all options"]
         self.choices = ["No", "Yes"]
 
         self.variable = StringVar(self)
@@ -70,7 +69,8 @@ class CaesarFrame(BaseFrame):
         self.dropdown_menu3.place(x=105, y=130)
 
         # Whats executed when submit button is clicked
-        def action():
+        def action():  # Edit action efficiency, make 'a' variable for whole function and make one try except
+            # +make only one output Label
 
             if self.variable.get() == self.CIPHERS[0]:
 
@@ -116,15 +116,47 @@ class CaesarFrame(BaseFrame):
                     with open(self.file_name, mode="w", encoding="utf-8") as file:
                         file.write(a)
 
+            elif self.variable.get() == self.CIPHERS[2]:
+
+                a = caesar_manual_decrypt(self.plain_text_input.get())
+                afinal = ""
+                temp = 1
+
+                try:
+                    self.encrypted.destroy()
+                except:
+                    pass
+
+                try:
+                    self.decrypted.destroy()
+                except:
+                    pass
+
+                for word in a:
+
+                    afinal += word
+
+                    if temp == 25:
+                        afinal += ". "
+                    else:
+                        afinal += ", "
+
+                    if temp % 5 == 0:
+                        afinal += "\n"
+
+                    temp += 1
+
+                self.decrypted = Label(self, text="Decrypted text: " + afinal)
+                self.decrypted.place(relx=.5, rely=.65, anchor="c")
+
+                if self.variable2.get() == self.choices[1]:
+                    self.file_name = self.file_name_input.get() + ".txt"
+                    with open(self.file_name, mode="w", encoding="utf-8") as file:
+                        file.write(afinal)
+
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
-        self.submit_button.place(x=260, y=330)
-
-        def onclick():
-            tkinter.messagebox.showinfo("Full list", caesar_manual_decrypt(self.plain_text_input.get()))
-
-        self.buton = Button(self, text="click", command=onclick)
-        self.buton.place(x=260, y=400)
+        self.submit_button.place(relx=.5, rely=.55, anchor="c")
 
 
 """def change_scene(frame_class):
