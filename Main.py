@@ -93,14 +93,14 @@ class CaesarFrame(BaseFrame):
             elif self.variable.get() == self.CIPHERS[2]:
 
                 a = caesar_manual_decrypt(self.plain_text_input.get())
-                afinal = ""
+                a_final = ""
 
                 for word in a:
-                    afinal += word
-                    afinal += 3*"\n"
+                    a_final += word
+                    a_final += 3 * "\n"
 
-                messagebox.showinfo(title="Decrypted text", message=afinal)
-                CaesarFrame.save(self, afinal)
+                messagebox.showinfo(title="Decrypted text", message=a_final)
+                CaesarFrame.save(self, a_final)
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
