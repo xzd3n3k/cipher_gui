@@ -6,11 +6,13 @@ def caesar_encrypt(text, shift):
     text = text.lower()
     encrypted_text = ""
 
-    for word in text:
-        if word not in "abcdefghijklmnopqrstuvwxyz":
-            encrypted_text += word
+    for letter in text:
+
+        if letter not in "abcdefghijklmnopqrstuvwxyz":
+            encrypted_text += letter
+
         else:
-            a = ord(word)
+            a = ord(letter)
             for x in range(shift):
                 if a == 122:
                     a = 96
@@ -23,6 +25,7 @@ def caesar_encrypt(text, shift):
 def caesar_decrypt(text, shift=0):
     if os.path.exists("txt_files/dictionary_extension.txt"):
         os.remove("txt_files/dictionary_extension.txt")
+
     else:
         pass
 

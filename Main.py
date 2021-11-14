@@ -2,6 +2,7 @@
 from Caesar import *
 from tkinter import *
 from tkinter import messagebox
+from tkinter import filedialog
 
 
 class StartFrame(Frame):
@@ -65,11 +66,21 @@ class BaseFrame(Frame):
         self.dropdown_menu2.configure(highlightbackground='#27252c')
         self.dropdown_menu2.place(x=229, y=170)
 
+        # Buttons
+        self.upload_button = Button(self, text="Upload", command=lambda: self.upload())
+        self.upload_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.upload_button.configure(highlightbackground='#27252c')
+        self.upload_button.place(x=310, y=90)
+
     def save(self, final_text):
         if self.variable2.get() == self.choices[1]:
             file_name = self.file_name_input.get() + ".txt"
             with open(file_name, mode="w", encoding="utf-8") as file:
                 file.write(final_text)
+
+    def upload(self):
+        path = filedialog.askopenfilename()
+        print(path)
 
 
 class CaesarFrame(BaseFrame):
