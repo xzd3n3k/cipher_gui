@@ -2,7 +2,7 @@
 from Caesar import *
 from Tritheme import *
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox, _setit
 from tkinter import filedialog
 
 
@@ -42,10 +42,10 @@ class BaseFrame(Frame):
         self.root = root
 
         # Labels
-        self.choose_cipher = Label(self, text="Choose cipher").place(x=30, y=50)
-        self.plain_text = Label(self, text="Text").place(x=30, y=90)
-        self.choice = Label(self, text="Save encrypted text to txt file").place(x=30, y=170)
-        self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected").place(x=30, y=210)
+        self.choose_cipher = Label(self, text="Choose cipher", bg="#27252c").place(x=30, y=50)
+        self.plain_text = Label(self, text="Text", bg="#27252c").place(x=30, y=90)
+        self.choice = Label(self, text="Save encrypted text to txt file", bg="#27252c").place(x=30, y=170)
+        self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected", bg="#27252c").place(x=30, y=210)
 
         # Inputs
         self.plain_text_input = Entry(self)
@@ -64,18 +64,18 @@ class BaseFrame(Frame):
         self.variable2.set(self.choices[0])
 
         self.dropdown_menu = OptionMenu(self, self.variable, *self.CIPHERS)
-        self.dropdown_menu.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu.config(fg='black', borderwidth=0, relief=RAISED)
         self.dropdown_menu.configure(highlightbackground='#27252c')
         self.dropdown_menu.place(x=160, y=50)
 
         self.dropdown_menu2 = OptionMenu(self, self.variable2, *self.choices)
-        self.dropdown_menu2.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu2.config(fg='black', borderwidth=0, relief=RAISED)
         self.dropdown_menu2.configure(highlightbackground='#27252c')
         self.dropdown_menu2.place(x=229, y=170)
 
         # Buttons
         self.upload_button = Button(self, text="Upload", command=lambda: self.upload())
-        self.upload_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.upload_button.config(fg='black', borderwidth=0, relief=RAISED)
         self.upload_button.configure(highlightbackground='#27252c')
         self.upload_button.place(x=310, y=90)
 
@@ -95,17 +95,22 @@ class CaesarFrame(BaseFrame):
         super().__init__(root, height=height)
 
         # Labels
-        self.shift = Label(self, text="Shift").place(x=30, y=130)
+        self.shift = Label(self, text="Shift", bg="#27252c").place(x=30, y=130)
 
         # OptionMenus
-        self.CIPHERS.append("Decrypt with all options")
+        """self.CIPHERS.append("Decrypt with all options")
+        
         self.variable = StringVar(self)
         self.variable.set(self.CIPHERS[0])
+        
         self.dropdown_menu.destroy()
+        
         self.dropdown_menu = OptionMenu(self, self.variable, *self.CIPHERS)
         self.dropdown_menu.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.dropdown_menu.configure(highlightbackground='#27252c')
-        self.dropdown_menu.place(x=160, y=50)
+        self.dropdown_menu.place(x=160, y=50)"""
+        self.CIPHERS.append("Decrypt with all options")
+        self.dropdown_menu['menu'].add_command(label="Decrypt with all options", command=_setit(self.variable, "Decrypt with all options"))
 
         self.shifts = []
 
@@ -116,7 +121,7 @@ class CaesarFrame(BaseFrame):
         self.variable3.set(self.shifts[0])
 
         self.dropdown_menu3 = OptionMenu(self, self.variable3, *self.shifts)
-        self.dropdown_menu3.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu3.config(fg='black', borderwidth=0, relief=RAISED)
         self.dropdown_menu3.configure(highlightbackground='#27252c')
         self.dropdown_menu3.place(x=105, y=130)
 
@@ -176,6 +181,11 @@ class TrithemeFrame(BaseFrame):
 
                 messagebox.showinfo(title="Decrypted text", message=a)
                 TrithemeFrame.save(self, a)
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
+        self.submit_button.place(relx=.5, rely=.55, anchor="c")
 
 
 class GUI(Tk):
