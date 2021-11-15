@@ -1,5 +1,6 @@
 # Imports
 from Caesar import *
+from Tritheme import *
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
@@ -17,11 +18,17 @@ class StartFrame(Frame):
         caesar_button.configure(highlightbackground='#27252c')
         caesar_button.place(relx=.5, rely=.04, anchor="c")
 
+        tritheme_button = Button(self, text="Tritheme", command=lambda: self.root.change_scene(
+            TrithemeFrame(root, 600)))
+        tritheme_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        tritheme_button.configure(highlightbackground='#27252c')
+        tritheme_button.place(relx=.5, rely=.09, anchor="c")
+
         base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
             BaseFrame(root, 600)))
         base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         base_button.configure(highlightbackground='#27252c')
-        base_button.place(relx=.5, rely=.09, anchor="c")
+        base_button.place(relx=.5, rely=.14, anchor="c")
 
         """empty = Button(self, text="Test", command=None)
         empty.config(width=10, fg='black', borderwidth=0, relief=RAISED)
@@ -47,7 +54,7 @@ class BaseFrame(Frame):
         self.file_name_input.place(x=30, y=250)
 
         # OptionMenus
-        self.CIPHERS = ["Encrypt", "Decrypt", "Decrypt with all options"]
+        self.CIPHERS = ["Encrypt", "Decrypt"]
         self.choices = ["No", "Yes"]
 
         self.variable = StringVar(self)
@@ -91,6 +98,15 @@ class CaesarFrame(BaseFrame):
         self.shift = Label(self, text="Shift").place(x=30, y=130)
 
         # OptionMenus
+        self.CIPHERS.append("Decrypt with all options")
+        self.variable = StringVar(self)
+        self.variable.set(self.CIPHERS[0])
+        self.dropdown_menu.destroy()
+        self.dropdown_menu = OptionMenu(self, self.variable, *self.CIPHERS)
+        self.dropdown_menu.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu.configure(highlightbackground='#27252c')
+        self.dropdown_menu.place(x=160, y=50)
+
         self.shifts = []
 
         for x in range(25):
@@ -138,6 +154,28 @@ class CaesarFrame(BaseFrame):
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
         self.submit_button.place(relx=.5, rely=.55, anchor="c")
+
+
+class TrithemeFrame(BaseFrame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
+
+        # Whats executed when submit button is clicked
+        def action():
+
+            if self.variable.get() == self.CIPHERS[0]:
+
+                a = tritheme_encrypt(self.plain_text_input.get())
+
+                messagebox.showinfo(title="Encrypted text", message=a)
+                TrithemeFrame.save(self, a)
+
+            elif self.variable.get() == self.CIPHERS[1]:
+
+                a = tritheme_decrypt(self.plain_text_input.get())
+
+                messagebox.showinfo(title="Decrypted text", message=a)
+                TrithemeFrame.save(self, a)
 
 
 class GUI(Tk):
