@@ -1,6 +1,8 @@
 # Imports
 from Caesar import *
 from Tritheme import *
+from Polybius import *
+from Trifid import *
 from tkinter import *
 from tkinter import messagebox, _setit
 from tkinter import filedialog
@@ -45,7 +47,8 @@ class BaseFrame(Frame):
         self.choose_cipher = Label(self, text="Choose cipher", bg="#27252c").place(x=30, y=50)
         self.plain_text = Label(self, text="Text", bg="#27252c").place(x=30, y=90)
         self.choice = Label(self, text="Save encrypted text to txt file", bg="#27252c").place(x=30, y=170)
-        self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected", bg="#27252c").place(x=30, y=210)
+        self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected",
+                               bg="#27252c").place(x=30, y=210)
 
         # Inputs
         self.plain_text_input = Entry(self)
