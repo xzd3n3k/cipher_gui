@@ -26,11 +26,17 @@ class StartFrame(Frame):
         tritheme_button.configure(highlightbackground='#27252c')
         tritheme_button.place(relx=.5, rely=.09, anchor="c")
 
+        polybius_button = Button(self, text="Polybius", command=lambda: self.root.change_scene(
+            PolybiusFrame(root, 600)))
+        polybius_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        polybius_button.configure(highlightbackground='#27252c')
+        polybius_button.place(relx=.5, rely=.14, anchor="c")
+
         base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
             BaseFrame(root, 600)))
         base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         base_button.configure(highlightbackground='#27252c')
-        base_button.place(relx=.5, rely=.14, anchor="c")
+        base_button.place(relx=.5, rely=.19, anchor="c")
 
         """empty = Button(self, text="Test", command=None)
         empty.config(width=10, fg='black', borderwidth=0, relief=RAISED)
@@ -101,17 +107,6 @@ class CaesarFrame(BaseFrame):
         self.shift = Label(self, text="Shift", bg="#27252c").place(x=30, y=130)
 
         # OptionMenus
-        """self.CIPHERS.append("Decrypt with all options")
-        
-        self.variable = StringVar(self)
-        self.variable.set(self.CIPHERS[0])
-        
-        self.dropdown_menu.destroy()
-        
-        self.dropdown_menu = OptionMenu(self, self.variable, *self.CIPHERS)
-        self.dropdown_menu.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        self.dropdown_menu.configure(highlightbackground='#27252c')
-        self.dropdown_menu.place(x=160, y=50)"""
         self.CIPHERS.append("Decrypt with all options")
         self.dropdown_menu['menu'].add_command(label="Decrypt with all options", command=_setit(self.variable, "Decrypt with all options"))
 
@@ -184,6 +179,34 @@ class TrithemeFrame(BaseFrame):
 
                 messagebox.showinfo(title="Decrypted text", message=a)
                 TrithemeFrame.save(self, a)
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
+        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+
+
+class PolybiusFrame(BaseFrame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
+
+        # Whats executed when submit button is clicked
+        def action():
+
+            if self.variable.get() == self.CIPHERS[0]:
+
+                a = polybius_encrypt(self.plain_text_input.get())
+
+                messagebox.showinfo(title="Encrypted text", message=a)
+                TrithemeFrame.save(self, a)
+
+            elif self.variable.get() == self.CIPHERS[1]:
+
+                a = polybius_decrypt(self.plain_text_input.get())
+
+                messagebox.showinfo(title="Decrypted text", message=a)
+                TrithemeFrame.save(self, a)
+
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
