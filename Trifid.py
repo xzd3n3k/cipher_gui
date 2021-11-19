@@ -8,17 +8,23 @@ def trifid_encrypt(text):
     locations = []
     for letter in text:
         location_of_letter = ""
+        squareNumber = 0
 
         for square in squares:
-            temp = 0
+            squareNumber += 1
+            listIndex = 1
 
-            for listt in square:
+            for seznam in square:
 
-                if letter in listt:
-                    location_of_letter += str(temp)
-                    location_of_letter += str(listt.index(letter))
+                if letter in seznam:
+                    location_of_letter += str(squareNumber)
+                    location_of_letter += str(listIndex)
+                    location_of_letter += str(seznam.index(letter)+1)
                     locations.append(location_of_letter)
-                temp += 1
+
+                else:
+                    pass
+                listIndex += 1
 
     print(locations)
 

@@ -14,34 +14,34 @@ class StartFrame(Frame):
         self.root = root
 
         # Buttons
-        caesar_button = Button(self, text="Caesar", command=lambda: self.root.change_scene(
+        self.caesar_button = Button(self, text="Caesar", command=lambda: self.root.change_scene(
             CaesarFrame(root, 600)))
-        caesar_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        caesar_button.configure(highlightbackground='#27252c')
-        caesar_button.place(relx=.5, rely=.04, anchor="c")
+        self.caesar_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.caesar_button.configure(highlightbackground='#27252c')
+        self.caesar_button.place(relx=.5, rely=.04, anchor="c")
 
-        tritheme_button = Button(self, text="Tritheme", command=lambda: self.root.change_scene(
+        self.tritheme_button = Button(self, text="Tritheme", command=lambda: self.root.change_scene(
             TrithemeFrame(root, 600)))
-        tritheme_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        tritheme_button.configure(highlightbackground='#27252c')
-        tritheme_button.place(relx=.5, rely=.09, anchor="c")
+        self.tritheme_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.tritheme_button.configure(highlightbackground='#27252c')
+        self.tritheme_button.place(relx=.5, rely=.09, anchor="c")
 
-        polybius_button = Button(self, text="Polybius", command=lambda: self.root.change_scene(
+        self.polybius_button = Button(self, text="Polybius", command=lambda: self.root.change_scene(
             PolybiusFrame(root, 600)))
-        polybius_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        polybius_button.configure(highlightbackground='#27252c')
-        polybius_button.place(relx=.5, rely=.14, anchor="c")
+        self.polybius_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.polybius_button.configure(highlightbackground='#27252c')
+        self.polybius_button.place(relx=.5, rely=.14, anchor="c")
 
-        base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
+        self.base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
             BaseFrame(root, 600)))
-        base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        base_button.configure(highlightbackground='#27252c')
-        base_button.place(relx=.5, rely=.19, anchor="c")
+        self.base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.base_button.configure(highlightbackground='#27252c')
+        self.base_button.place(relx=.5, rely=.19, anchor="c")
 
-        """empty = Button(self, text="Test", command=None)
-        empty.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        empty.configure(highlightbackground='#27252c')
-        empty.place(relx=.5, rely=.14, anchor="c")"""
+        self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
+        self.exit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.exit_button.configure(highlightbackground='#27252c')
+        self.exit_button.place(relx=.5, rely=.24, anchor="c")
 
 
 class BaseFrame(Frame):
@@ -88,6 +88,12 @@ class BaseFrame(Frame):
         self.upload_button.configure(highlightbackground='#27252c')
         self.upload_button.place(x=310, y=90)
 
+        self.menu_button = Button(self, text="Back to menu", command=lambda: self.root.change_scene(
+            StartFrame(root, 600)))
+        self.menu_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.menu_button.configure(highlightbackground='#27252c')
+        self.menu_button.place(relx=.13, rely=.95, anchor="c")
+
     def save(self, final_text):
         if self.variable2.get() == self.choices[1]:
             file_name = self.file_name_input.get() + ".txt"
@@ -108,7 +114,8 @@ class CaesarFrame(BaseFrame):
 
         # OptionMenus
         self.CIPHERS.append("Decrypt with all options")
-        self.dropdown_menu['menu'].add_command(label="Decrypt with all options", command=_setit(self.variable, "Decrypt with all options"))
+        self.dropdown_menu['menu'].add_command(label="Decrypt with all options", command=_setit(
+            self.variable, "Decrypt with all options"))
 
         self.shifts = []
 
