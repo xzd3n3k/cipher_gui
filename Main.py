@@ -235,10 +235,13 @@ class GUI(Tk):
         self.resizable(False, False)
         self.change_scene(StartFrame(self, 600))
 
+        def show_info():
+            messagebox.showinfo(title="About", message="Zdenek Nemec, 2021. All rights reserved.")
+
         # Menu bar - About desc and Exit button
         self.menubar = Menu(self)
         self.appmenu = Menu(self.menubar, tearoff=0)
-        self.appmenu.add_command(label="About")
+        self.appmenu.add_command(label="About", command=lambda: show_info())
         self.appmenu.add_separator()
         self.appmenu.add_command(label="Exit", command=self.quit)
         self.menubar.add_cascade(label="Application", menu=self.appmenu)

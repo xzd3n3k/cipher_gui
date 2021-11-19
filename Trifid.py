@@ -28,5 +28,17 @@ def trifid_encrypt(text):
 
     print(locations)
 
+    upper = []
+    middle = []
+    lower = []
+    for x in range(len(locations)):
+        upper.append(locations[x][0])
+        middle.append(locations[x][1])
+        lower.append(locations[x][2])
+
+    print(upper)
+    print(middle)
+    print(lower)
+
 
 trifid_encrypt("hello")
