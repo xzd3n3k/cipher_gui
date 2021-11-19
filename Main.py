@@ -205,20 +205,25 @@ class PolybiusFrame(BaseFrame):
                 a = polybius_encrypt(self.plain_text_input.get())
 
                 messagebox.showinfo(title="Encrypted text", message=a)
-                TrithemeFrame.save(self, a)
+                PolybiusFrame.save(self, a)
 
             elif self.variable.get() == self.CIPHERS[1]:
 
                 a = polybius_decrypt(self.plain_text_input.get())
 
                 messagebox.showinfo(title="Decrypted text", message=a)
-                TrithemeFrame.save(self, a)
+                PolybiusFrame.save(self, a)
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
         self.submit_button.place(relx=.5, rely=.55, anchor="c")
+
+
+class TrifidFrame(BaseFrame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
 
 
 class GUI(Tk):
