@@ -32,16 +32,22 @@ class StartFrame(Frame):
         self.polybius_button.configure(highlightbackground='#27252c')
         self.polybius_button.place(relx=.5, rely=.14, anchor="c")
 
+        self.trifid_button = Button(self, text="Trifid", command=lambda: self.root.change_scene(
+            TrifidFrame(root, 600)))
+        self.trifid_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.trifid_button.configure(highlightbackground='#27252c')
+        self.trifid_button.place(relx=.5, rely=.19, anchor="c")
+
         self.base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
             BaseFrame(root, 600)))
         self.base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.base_button.configure(highlightbackground='#27252c')
-        self.base_button.place(relx=.5, rely=.19, anchor="c")
+        self.base_button.place(relx=.5, rely=.24, anchor="c")
 
         self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
         self.exit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.exit_button.configure(highlightbackground='#27252c')
-        self.exit_button.place(relx=.5, rely=.24, anchor="c")
+        self.exit_button.place(relx=.5, rely=.29, anchor="c")
 
 
 class BaseFrame(Frame):
@@ -225,6 +231,45 @@ class TrifidFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
 
+        # Labels
+        self.shift = Label(self, text="Period", bg="#27252c").place(x=30, y=130)
+
+        # OptionMenus
+        self.period = []
+
+        for x in range(16):
+            self.period.append(x + 5)
+
+        self.variable4 = StringVar(self)
+        self.variable4.set(self.period[0])
+
+        self.dropdown_menu4 = OptionMenu(self, self.variable4, *self.period)
+        self.dropdown_menu4.config(fg='black', borderwidth=0, relief=RAISED)
+        self.dropdown_menu4.configure(highlightbackground='#27252c')
+        self.dropdown_menu4.place(x=105, y=130)
+
+        # Whats executed when submit button is clicked
+        def action():
+
+            if self.variable.get() == self.CIPHERS[0]:
+
+                a = trifid_encrypt(self.plain_text_input.get())
+
+                messagebox.showinfo(title="Encrypted text", message=a)
+                TrifidFrame.save(self, a)
+
+            elif self.variable.get() == self.CIPHERS[1]:
+
+                a = trifid_decrypt(self.plain_text_input.get())
+
+                messagebox.showinfo(title="Decrypted text", message=a)
+                TrifidFrame.save(self, a)
+
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
+        self.submit_button.place(relx=.5, rely=.55, anchor="c")
 
 class GUI(Tk):
     def __init__(self, width, height, bgc, title):

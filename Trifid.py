@@ -41,4 +41,5 @@ def trifid_encrypt(text):
     print(lower)
 
 
-trifid_encrypt("hello")
+def trifid_decrypt(text):
+    pass
