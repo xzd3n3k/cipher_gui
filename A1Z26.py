@@ -1,4 +1,9 @@
 def a1z26_encrypt(text, separator=" ", key="abcdefghijklmnopqrstuvwxyz"):
+    if key == "":
+        key = "abcdefghijklmnopqrstuvwxyz"
+    if separator == "":
+        separator = " "
+
     encrypted_text = ""
     keyy = "abcdefghijklmnopqrstuvwxyz"
     key_verifier_text = ""
@@ -13,10 +18,13 @@ def a1z26_encrypt(text, separator=" ", key="abcdefghijklmnopqrstuvwxyz"):
             key_verifier += 1
 
     if key_verifier == len(keyy):
+        separator_limit = 1
         for letter in text:
             position = key.find(letter)
             encrypted_text += str(position+1)
-            encrypted_text += separator
+            if separator_limit < len(text):
+                encrypted_text += separator
+                separator_limit += 1
 
     else:
         encrypted_text = "Incorrect alphabet: some characters are missing or used multiple times!"
@@ -25,12 +33,16 @@ def a1z26_encrypt(text, separator=" ", key="abcdefghijklmnopqrstuvwxyz"):
 
 
 def a1z26_decrypt(text, separator=" ", key="abcdefghijklmnopqrstuvwxyz"):
+    if key == "":
+        key = "abcdefghijklmnopqrstuvwxyz"
+    if separator == "":
+        separator = " "
+
     decrypted_text = ""
     keyy = "abcdefghijklmnopqrstuvwxyz"
     key_verifier_text = ""
     key_verifier = 0
     text = text.split(separator)
-    text.pop()
 
     for letter in key:
         if letter in key_verifier_text:

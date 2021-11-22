@@ -3,6 +3,7 @@ from Caesar import *
 from Tritheme import *
 from Polybius import *
 from Trifid import *
+from A1Z26 import *
 from tkinter import *
 from tkinter import messagebox, _setit
 from tkinter import filedialog
@@ -38,11 +39,11 @@ class StartFrame(Frame):
         self.trifid_button.configure(highlightbackground='#27252c')
         self.trifid_button.place(relx=.5, rely=.19, anchor="c")
 
-        self.base_button = Button(self, text="Base", command=lambda: self.root.change_scene(
-            BaseFrame(root, 600)))
-        self.base_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
-        self.base_button.configure(highlightbackground='#27252c')
-        self.base_button.place(relx=.5, rely=.24, anchor="c")
+        self.a1z26_frame = Button(self, text="A1Z26", command=lambda: self.root.change_scene(
+            A1Z26Frame(root, 600)))
+        self.a1z26_frame.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.a1z26_frame.configure(highlightbackground='#27252c')
+        self.a1z26_frame.place(relx=.5, rely=.24, anchor="c")
 
         self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
         self.exit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
@@ -270,6 +271,45 @@ class TrifidFrame(BaseFrame):
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
         self.submit_button.place(relx=.5, rely=.55, anchor="c")
+
+
+class A1Z26Frame(BaseFrame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
+
+        # Labels
+        self.separator = Label(self, text="Separator\n(optional)", bg="#27252c").place(x=30, y=130)
+        self.alphabet = Label(self, text="Alphabet\n(optional)", bg="#27252c").place(x=300, y=130)
+
+        # Inputs
+        self.separator_input = Entry(self)
+        self.separator_input.place(x=105, y=130)
+        self.alphabet_input = Entry(self)
+        self.alphabet_input.place(x=375, y=130)
+
+        # Whats executed when submit button is clicked
+        def action():
+
+            if self.variable.get() == self.CIPHERS[0]:
+
+                a = a1z26_encrypt(self.plain_text_input.get(), self.separator_input.get(), self.alphabet_input.get())
+
+                messagebox.showinfo(title="Encrypted text", message=a)
+                A1Z26Frame.save(self, a)
+
+            elif self.variable.get() == self.CIPHERS[1]:
+
+                a = a1z26_decrypt(self.plain_text_input.get(), self.separator_input.get(), self.alphabet_input.get())
+
+                messagebox.showinfo(title="Decrypted text", message=a)
+                A1Z26Frame.save(self, a)
+
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
+        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+
 
 class GUI(Tk):
     def __init__(self, width, height, bgc, title):
