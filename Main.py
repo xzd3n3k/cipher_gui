@@ -254,7 +254,7 @@ class TrifidFrame(BaseFrame):
 
             if self.variable.get() == self.CIPHERS[0]:
 
-                a = trifid_encrypt(self.plain_text_input.get())
+                a = trifid_encrypt(self.plain_text_input.get(), int(self.variable4.get()))
 
                 messagebox.showinfo(title="Encrypted text", message=a)
                 TrifidFrame.save(self, a)
