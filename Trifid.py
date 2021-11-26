@@ -1,4 +1,4 @@
-def trifid_encrypt(text, period):  # CHECK LETTER BY LETTER EVERY POSITION
+def trifid_encrypt(text, period):
     encrypted_text = ""
     text = text.lower()
     square1 = [["e", "p", "s"], ["d", "u", "c"], ["v", "w", "y"]]
@@ -70,8 +70,24 @@ def trifid_encrypt(text, period):  # CHECK LETTER BY LETTER EVERY POSITION
         locs_to_encrypt.append(locs)
 
     print(locs_to_encrypt)
+# BETA TEST
+    letters = []
+    for element in locs_to_encrypt:
+        #print(squares[int(element[0])-1][int(element[1])-1][int(element[2])-1], end=" ")
+        letters.append(squares[int(element[0])-1][int(element[1])-1][int(element[2])-1])
+
+    x = 0
+    for lttr in letters:
+        if (x % 5 == 0) and (x != 0):
+            encrypted_text += " "
+
+        encrypted_text += lttr
+        x += 1
+    print(encrypted_text)
+
 
 trifid_encrypt("DEFEND THE EAST WALL OF THE CASTLE.", 5)
+
 
 def trifid_decrypt(text):
     pass
