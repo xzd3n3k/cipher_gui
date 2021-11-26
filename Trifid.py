@@ -69,24 +69,19 @@ def trifid_encrypt(text, period):
             temp += 1
         locs_to_encrypt.append(locs)
 
-    print(locs_to_encrypt)
-# BETA TEST
     letters = []
     for element in locs_to_encrypt:
-        #print(squares[int(element[0])-1][int(element[1])-1][int(element[2])-1], end=" ")
         letters.append(squares[int(element[0])-1][int(element[1])-1][int(element[2])-1])
 
     x = 0
     for lttr in letters:
-        if (x % 5 == 0) and (x != 0):
+        if (x % period == 0) and (x != 0):
             encrypted_text += " "
 
         encrypted_text += lttr
         x += 1
-    print(encrypted_text)
 
-
-trifid_encrypt("DEFEND THE EAST WALL OF THE CASTLE.", 5)
+    return encrypted_text
 
 
 def trifid_decrypt(text):
