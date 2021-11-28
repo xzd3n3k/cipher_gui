@@ -95,8 +95,8 @@ class BaseFrame(Frame):
         self.upload_button.configure(highlightbackground='#27252c')
         self.upload_button.place(x=310, y=90)
 
-        self.menu_button = Button(self, text="Back to menu", command=lambda: self.root.change_scene(
-            StartFrame(root, 600)))
+        self.menu_button = Button(self, text="Back to menu", command=lambda: [self.root.change_scene(
+            StartFrame(root, 600)), gui.title("Encrypt-decrypt app")])
         self.menu_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.menu_button.configure(highlightbackground='#27252c')
         self.menu_button.place(relx=.13, rely=.95, anchor="c")
@@ -115,6 +115,7 @@ class BaseFrame(Frame):
 class CaesarFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
+        gui.title("Caesar cipher")
 
         # Labels
         self.shift = Label(self, text="Shift", bg="#27252c").place(x=30, y=130)
@@ -176,6 +177,7 @@ class CaesarFrame(BaseFrame):
 class TrithemeFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
+        gui.title("Tritheme cipher")
 
         # Whats executed when submit button is clicked
         def action():
@@ -203,6 +205,7 @@ class TrithemeFrame(BaseFrame):
 class PolybiusFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
+        gui.title("Polybius cipher")
 
         # Whats executed when submit button is clicked
         def action():
@@ -231,6 +234,7 @@ class PolybiusFrame(BaseFrame):
 class TrifidFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
+        gui.title("Trifid cipher")
 
         # Labels
         self.shift = Label(self, text="Period", bg="#27252c").place(x=30, y=130)
@@ -276,6 +280,7 @@ class TrifidFrame(BaseFrame):
 class A1Z26Frame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
+        gui.title("A1Z26 cipher")
 
         # Labels
         self.separator = Label(self, text="Separator\n(optional)", bg="#27252c").place(x=30, y=130)
@@ -321,7 +326,7 @@ class GUI(Tk):
         self.change_scene(StartFrame(self, 600))
 
         def show_info():
-            messagebox.showinfo(title="About", message="Zdenek Nemec, 2021. All rights reserved.")
+            messagebox.showinfo(title="About", message="© 2021 Zdenek Nemec, 2021. All rights reserved.")
 
         # Menu bar - About desc and Exit button
         self.menubar = Menu(self)
