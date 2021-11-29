@@ -1,22 +1,16 @@
 def trifid_encrypt(text, period):
     encrypted_text = ""
     text = text.lower()
-    key = "abcdefghijklmno.pqrstuvwxyz"
+    key = "epsducvwym.zlkxnbtfgorijhaq"
     key = key.lower()
-    sq = [[], [], []]
+    squares = [[], [], []]
     pos = 0
     for x in range(3):
         for y in range(3):
-            sq[x].append([])
+            squares[x].append([])
             for z in range(3):
-                sq[x][y].append(key[pos])
+                squares[x][y].append(key[pos])
                 pos += 1
-    print(sq)
-    square1 = [["e", "p", "s"], ["d", "u", "c"], ["v", "w", "y"]]
-    square2 = [["m", ".", "z"], ["l", "k", "x"], ["n", "b", "t"]]
-    square3 = [["f", "g", "o"], ["r", "i", "j"], ["h", "a", "q"]]
-    squares = [square1, square2, square3]
-    print(squares)
 
     locations = []
     for letter in text:
@@ -107,4 +101,4 @@ def trifid_decrypt(text):
     print(letters)
 
 trifid_decrypt("qjgdh jqurb mbejp s")
-trifid_encrypt("ahoj", 5)
+print(trifid_encrypt("ahoj", 5))
