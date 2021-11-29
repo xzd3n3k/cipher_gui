@@ -237,7 +237,12 @@ class TrifidFrame(BaseFrame):
         gui.title("Trifid cipher")
 
         # Labels
-        self.shift = Label(self, text="Period", bg="#27252c").place(x=30, y=130)
+        self.shift = Label(self, text="Period", bg="#27252c").place(x=310, y=130)
+        self.key = Label(self, text="Key\n         (optional)", bg="#27252c").place(x=-4, y=130)
+
+        # Inputs
+        self.key_input = Entry(self)
+        self.key_input.place(x=105, y=128)
 
         # OptionMenus
         self.period = []
@@ -251,14 +256,14 @@ class TrifidFrame(BaseFrame):
         self.dropdown_menu4 = OptionMenu(self, self.variable4, *self.period)
         self.dropdown_menu4.config(fg='black', borderwidth=0, relief=RAISED)
         self.dropdown_menu4.configure(highlightbackground='#27252c')
-        self.dropdown_menu4.place(x=105, y=130)
+        self.dropdown_menu4.place(x=370, y=130)
 
         # Whats executed when submit button is clicked
         def action():
 
             if self.variable.get() == self.CIPHERS[0]:
 
-                a = trifid_encrypt(self.plain_text_input.get(), int(self.variable4.get()))
+                a = trifid_encrypt(self.plain_text_input.get(), int(self.variable4.get()), self.key_input.get())
 
                 messagebox.showinfo(title="Encrypted text", message=a)
                 TrifidFrame.save(self, a)
@@ -326,7 +331,7 @@ class GUI(Tk):
         self.change_scene(StartFrame(self, 600))
 
         def show_info():
-            messagebox.showinfo(title="About", message="© 2021 Zdenek Nemec, 2021. All rights reserved.")
+            messagebox.showinfo(title="About", message="© 2021 Zdenek Nemec.")
 
         # Menu bar - About desc and Exit button
         self.menubar = Menu(self)
