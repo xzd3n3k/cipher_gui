@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 .DS_Store
+dictionary_extension.txt
+txt_files/dictionary_extension.txt
+*/dictionary_extension.txt
 *.DS_Store
 # C extensions
 *.so
