@@ -5,6 +5,8 @@ __pycache__/
 dictionary_extension.txt
 txt_files/dictionary_extension.txt
 */dictionary_extension.txt
+*/.DS_Store
+txt_files/.DS_Store
 *.DS_Store
 # C extensions
 *.so
