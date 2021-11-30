@@ -92,16 +92,79 @@ def trifid_encrypt(text, period, key="epsducvwym.zlkxnbtfgorijhaq"):
     return encrypted_text
 
 
-def trifid_decrypt(text):
+def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
+    if key == "":
+        key = "epsducvwym.zlkxnbtfgorijhaq"
+
+    key = key.lower()
+    text = text.lower()
     decrypted_text = ""
     letters = []
+    period = 0
+    lines = [[], [], []]
+    squares = [[], [], []]
+    pos = 0
+    for x in range(3):
+        for y in range(3):
+            squares[x].append([])
+            for z in range(3):
+                squares[x][y].append(key[pos])
+                pos += 1
+
+    for letter in text:
+        if letter != " ":
+            period += 1
+        else:
+            break
 
     for letter in text:
         if letter != " ":
             letters.append(letter)
 
-    print(letters)
+    locations = []
+    for letter in text:
+        location_of_letter = ""
+        square_number = 0
 
+        for square in squares:
+            square_number += 1
+            list_index = 1
 
-trifid_decrypt("qjgdh jqurb mbejp s")
-print(trifid_encrypt("ahoj", 5))
+            for seznam in square:
+
+                if letter in seznam:
+                    location_of_letter += str(square_number)
+                    location_of_letter += str(list_index)
+                    location_of_letter += str(seznam.index(letter) + 1)
+                    locations.append(location_of_letter)
+
+                else:
+                    pass
+                list_index += 1
+
+    locs_to_lineup = []
+    for prvek in locations:
+        for x in range(3):
+            locs_to_lineup.append(prvek[x])
+
+    line_count = int(len(locs_to_lineup)/3)
+
+    i = len(locs_to_lineup) // (period*3)
+    j = len(locs_to_lineup) % (period*3)
+
+    sqrs = []
+    for x in range(i):
+        sqrs.append([])
+
+    if j > 0:
+        sqrs.append([])
+
+    psition = 0
+    for x in range(i):
+        for y in range(period*3):
+            sqrs[x].append(locs_to_lineup[psition])
+            psition += 1
+
+    for x in range(j):
+        sqrs[len(sqrs)-1].append(locs_to_lineup[psition])
+        psition += 1
