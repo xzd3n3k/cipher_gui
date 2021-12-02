@@ -340,7 +340,7 @@ class GUI(Tk):
         self.change_scene(StartFrame(self, 600))
 
         def show_info():
-            messagebox.showinfo(title="About", message="© 2021 Zdenek Nemec.")
+            messagebox.showinfo(title="About", message="© 2021 Zdenek Nemec")
 
         # Menu bar - About desc and Exit button
         self.menubar = Menu(self)
