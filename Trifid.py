@@ -186,9 +186,11 @@ def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
         b += 1
 
     for decr_locs in locs_to_decrypt:
+        
         for x in range(len(decr_locs)//3):
-            # print(decr_locs[x], decr_locs[x+(len(decr_locs)//3)], decr_locs[x+((len(decr_locs)//3)*2)])
-            decrypted_text += squares[int(decr_locs[x])-1][int(decr_locs[x+(len(decr_locs)//3)])-1][int(decr_locs[x+((len(decr_locs)//3)*2)])-1]
+            decrypted_text += squares[int(decr_locs[x])-1][int(decr_locs[x+(len(decr_locs)//3)])-1][int(
+                decr_locs[x+((len(decr_locs)//3)*2)])-1]
+
         decrypted_text += " "
 
     return decrypted_text
