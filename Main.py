@@ -361,3 +361,5 @@ class GUI(Tk):
 gui = GUI(600, 600, "#27252c", "Encrypt-decrypt app")
 gui.grid_columnconfigure(0, weight=1)
 gui.mainloop()
+
+# <3
