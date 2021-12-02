@@ -168,3 +168,27 @@ def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
     for x in range(j):
         sqrs[len(sqrs)-1].append(locs_to_lineup[psition])
         psition += 1
+
+    locs_to_decrypt = []
+    b = 0
+    for lst in sqrs:
+        letter_count = len(lst)/3
+        letter_count = int(letter_count)
+        locs_to_decrypt.append([])
+
+        a = 0
+        for x in range(len(lst)):
+            if a == letter_count:
+                a = 0
+
+            locs_to_decrypt[b].append(lst[x])
+            a += 1
+        b += 1
+
+    for decr_locs in locs_to_decrypt:
+        for x in range(len(decr_locs)//3):
+            # print(decr_locs[x], decr_locs[x+(len(decr_locs)//3)], decr_locs[x+((len(decr_locs)//3)*2)])
+            decrypted_text += squares[int(decr_locs[x])-1][int(decr_locs[x+(len(decr_locs)//3)])-1][int(decr_locs[x+((len(decr_locs)//3)*2)])-1]
+        decrypted_text += " "
+
+    return decrypted_text
