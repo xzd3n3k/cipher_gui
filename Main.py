@@ -270,7 +270,7 @@ class TrifidFrame(BaseFrame):
 
             elif self.variable.get() == self.CIPHERS[1]:
 
-                a = trifid_decrypt(self.plain_text_input.get())
+                a = trifid_decrypt(self.plain_text_input.get(), self.key_input.get())
 
                 messagebox.showinfo(title="Decrypted text", message=a)
                 TrifidFrame.save(self, a)

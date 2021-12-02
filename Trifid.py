@@ -101,7 +101,6 @@ def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
     decrypted_text = ""
     letters = []
     period = 0
-    lines = [[], [], []]
     squares = [[], [], []]
     pos = 0
     for x in range(3):
@@ -147,8 +146,6 @@ def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
         for x in range(3):
             locs_to_lineup.append(prvek[x])
 
-    line_count = int(len(locs_to_lineup)/3)
-
     i = len(locs_to_lineup) // (period*3)
     j = len(locs_to_lineup) % (period*3)
 
@@ -186,7 +183,6 @@ def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
         b += 1
 
     for decr_locs in locs_to_decrypt:
-        
         for x in range(len(decr_locs)//3):
             decrypted_text += squares[int(decr_locs[x])-1][int(decr_locs[x+(len(decr_locs)//3)])-1][int(
                 decr_locs[x+((len(decr_locs)//3)*2)])-1]
