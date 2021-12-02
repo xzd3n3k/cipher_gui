@@ -5,7 +5,8 @@ from Polybius import *
 from Trifid import *
 from A1Z26 import *
 from tkinter import *
-from tkinter import messagebox, _setit
+from tkinter import messagebox
+import tkinter
 from tkinter import filedialog
 
 
@@ -19,36 +20,36 @@ class StartFrame(Frame):
             CaesarFrame(root, 600)))
         self.caesar_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.caesar_button.configure(highlightbackground='#27252c')
-        self.caesar_button.place(relx=.5, rely=.04, anchor="c")
+        self.caesar_button.place(relx=.5, rely=.04, anchor="center")
 
         self.tritheme_button = Button(self, text="Tritheme", command=lambda: self.root.change_scene(
             TrithemeFrame(root, 600)))
         self.tritheme_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.tritheme_button.configure(highlightbackground='#27252c')
-        self.tritheme_button.place(relx=.5, rely=.09, anchor="c")
+        self.tritheme_button.place(relx=.5, rely=.09, anchor="center")
 
         self.polybius_button = Button(self, text="Polybius", command=lambda: self.root.change_scene(
             PolybiusFrame(root, 600)))
         self.polybius_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.polybius_button.configure(highlightbackground='#27252c')
-        self.polybius_button.place(relx=.5, rely=.14, anchor="c")
+        self.polybius_button.place(relx=.5, rely=.14, anchor="center")
 
         self.trifid_button = Button(self, text="Trifid", command=lambda: self.root.change_scene(
             TrifidFrame(root, 600)))
         self.trifid_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.trifid_button.configure(highlightbackground='#27252c')
-        self.trifid_button.place(relx=.5, rely=.19, anchor="c")
+        self.trifid_button.place(relx=.5, rely=.19, anchor="center")
 
         self.a1z26_frame = Button(self, text="A1Z26", command=lambda: self.root.change_scene(
             A1Z26Frame(root, 600)))
         self.a1z26_frame.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.a1z26_frame.configure(highlightbackground='#27252c')
-        self.a1z26_frame.place(relx=.5, rely=.24, anchor="c")
+        self.a1z26_frame.place(relx=.5, rely=.24, anchor="center")
 
         self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
         self.exit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.exit_button.configure(highlightbackground='#27252c')
-        self.exit_button.place(relx=.5, rely=.29, anchor="c")
+        self.exit_button.place(relx=.5, rely=.29, anchor="center")
 
 
 class BaseFrame(Frame):
@@ -57,11 +58,14 @@ class BaseFrame(Frame):
         self.root = root
 
         # Labels
-        self.choose_cipher = Label(self, text="Choose cipher", bg="#27252c").place(x=30, y=50)
-        self.plain_text = Label(self, text="Text", bg="#27252c").place(x=30, y=90)
-        self.choice = Label(self, text="Save encrypted text to txt file", bg="#27252c").place(x=30, y=170)
-        self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected",
-                               bg="#27252c").place(x=30, y=210)
+        self.choose_cipher = Label(self, text="Choose cipher", bg="#27252c")
+        self.choose_cipher.place(x=30, y=50)
+        self.plain_text = Label(self, text="Text", bg="#27252c")
+        self.plain_text.place(x=30, y=90)
+        self.choice = Label(self, text="Save encrypted text to txt file", bg="#27252c")
+        self.choice.place(x=30, y=170)
+        self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected", bg="#27252c")
+        self.file_name.place(x=30, y=210)
 
         # Inputs
         self.plain_text_input = Entry(self)
@@ -99,7 +103,7 @@ class BaseFrame(Frame):
             StartFrame(root, 600)), gui.title("Encrypt-decrypt app")])
         self.menu_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.menu_button.configure(highlightbackground='#27252c')
-        self.menu_button.place(relx=.13, rely=.95, anchor="c")
+        self.menu_button.place(relx=.13, rely=.95, anchor="center")
 
     def save(self, final_text):
         if self.variable2.get() == self.choices[1]:
@@ -118,11 +122,12 @@ class CaesarFrame(BaseFrame):
         gui.title("Caesar cipher")
 
         # Labels
-        self.shift = Label(self, text="Shift", bg="#27252c").place(x=30, y=130)
+        self.shift = Label(self, text="Shift", bg="#27252c")
+        self.shift.place(x=30, y=130)
 
         # OptionMenus
         self.CIPHERS.append("Decrypt with all options")
-        self.dropdown_menu['menu'].add_command(label="Decrypt with all options", command=_setit(
+        self.dropdown_menu['menu'].add_command(label="Decrypt with all options", command=tkinter._setit(
             self.variable, "Decrypt with all options"))
 
         self.shifts = []
@@ -131,7 +136,7 @@ class CaesarFrame(BaseFrame):
             self.shifts.append(x + 1)
 
         self.variable3 = StringVar(self)
-        self.variable3.set(self.shifts[0])
+        self.variable3.set(str(self.shifts[0]))
 
         self.dropdown_menu3 = OptionMenu(self, self.variable3, *self.shifts)
         self.dropdown_menu3.config(fg='black', borderwidth=0, relief=RAISED)
@@ -171,7 +176,7 @@ class CaesarFrame(BaseFrame):
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
-        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
 
 
 class TrithemeFrame(BaseFrame):
@@ -199,7 +204,7 @@ class TrithemeFrame(BaseFrame):
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
-        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
 
 
 class PolybiusFrame(BaseFrame):
@@ -228,7 +233,7 @@ class PolybiusFrame(BaseFrame):
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
-        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
 
 
 class TrifidFrame(BaseFrame):
@@ -237,8 +242,10 @@ class TrifidFrame(BaseFrame):
         gui.title("Trifid cipher")
 
         # Labels
-        self.shift = Label(self, text="Period", bg="#27252c").place(x=310, y=130)
-        self.key = Label(self, text="Key\n         (optional)", bg="#27252c").place(x=-4, y=130)
+        self.shift = Label(self, text="Period", bg="#27252c")
+        self.shift.place(x=310, y=130)
+        self.key = Label(self, text="Key\n         (optional)", bg="#27252c")
+        self.key.place(x=-4, y=130)
 
         # Inputs
         self.key_input = Entry(self)
@@ -251,7 +258,7 @@ class TrifidFrame(BaseFrame):
             self.period.append(x + 5)
 
         self.variable4 = StringVar(self)
-        self.variable4.set(self.period[0])
+        self.variable4.set(str(self.period[0]))
 
         self.dropdown_menu4 = OptionMenu(self, self.variable4, *self.period)
         self.dropdown_menu4.config(fg='black', borderwidth=0, relief=RAISED)
@@ -279,7 +286,7 @@ class TrifidFrame(BaseFrame):
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
-        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
 
 
 class A1Z26Frame(BaseFrame):
@@ -288,8 +295,10 @@ class A1Z26Frame(BaseFrame):
         gui.title("A1Z26 cipher")
 
         # Labels
-        self.separator = Label(self, text="Separator\n(optional)", bg="#27252c").place(x=30, y=130)
-        self.alphabet = Label(self, text="Alphabet\n(optional)", bg="#27252c").place(x=300, y=130)
+        self.separator = Label(self, text="Separator\n(optional)", bg="#27252c")
+        self.separator.place(x=30, y=130)
+        self.alphabet = Label(self, text="Alphabet\n(optional)", bg="#27252c")
+        self.alphabet.place(x=300, y=130)
 
         # Inputs
         self.separator_input = Entry(self)
@@ -318,7 +327,7 @@ class A1Z26Frame(BaseFrame):
         self.submit_button = Button(self, text="Submit", command=lambda: action())
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
-        self.submit_button.place(relx=.5, rely=.55, anchor="c")
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
 
 
 class GUI(Tk):

@@ -36,8 +36,14 @@ def caesar_decrypt(text, shift=0):
         dictionary = dictionary.split()
         match = 0
         words_from_text = "ahoj"
+        limit = 0
+        while match < len(words_from_text) // 2:
 
-        while match < len(words_from_text) * (1 / 4):
+            if limit == 1000:
+                decrypted_text = "Program s jistotou nemohl desifrovat text, prosim pouzijte Decrypt with all options"
+                break
+            limit += 1
+
             match = 0
             match_words = []
             shift += 1
