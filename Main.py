@@ -18,38 +18,45 @@ class StartFrame(Frame):
         # Buttons
         self.caesar_button = Button(self, text="Caesar", command=lambda: self.root.change_scene(
             CaesarFrame(root, 600)))
-        self.caesar_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.caesar_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.caesar_button.configure(highlightbackground='#27252c')
-        self.caesar_button.place(relx=.5, rely=.04, anchor="center")
+        self.caesar_button.place(relx=.5, rely=.14, anchor="center")
 
         self.tritheme_button = Button(self, text="Tritheme", command=lambda: self.root.change_scene(
             TrithemeFrame(root, 600)))
-        self.tritheme_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.tritheme_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.tritheme_button.configure(highlightbackground='#27252c')
-        self.tritheme_button.place(relx=.5, rely=.09, anchor="center")
+        self.tritheme_button.place(relx=.5, rely=.25, anchor="center")
 
         self.polybius_button = Button(self, text="Polybius", command=lambda: self.root.change_scene(
             PolybiusFrame(root, 600)))
-        self.polybius_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.polybius_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.polybius_button.configure(highlightbackground='#27252c')
-        self.polybius_button.place(relx=.5, rely=.14, anchor="center")
+        self.polybius_button.place(relx=.5, rely=.36, anchor="center")
 
         self.trifid_button = Button(self, text="Trifid", command=lambda: self.root.change_scene(
             TrifidFrame(root, 600)))
-        self.trifid_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.trifid_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.trifid_button.configure(highlightbackground='#27252c')
-        self.trifid_button.place(relx=.5, rely=.19, anchor="center")
+        self.trifid_button.place(relx=.5, rely=.47, anchor="center")
 
         self.a1z26_frame = Button(self, text="A1Z26", command=lambda: self.root.change_scene(
             A1Z26Frame(root, 600)))
-        self.a1z26_frame.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.a1z26_frame.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.a1z26_frame.configure(highlightbackground='#27252c')
-        self.a1z26_frame.place(relx=.5, rely=.24, anchor="center")
+        self.a1z26_frame.place(relx=.5, rely=.58, anchor="center")
+
+        self.alphabetical_substitution_frame = Button(
+            self, text="Alphabetical substitution", command=lambda: self.root.change_scene(
+                AlphabeticalSubstitutionFrame(root, 600)))
+        self.alphabetical_substitution_frame.config(width=15, fg='black', borderwidth=0, relief=RAISED)
+        self.alphabetical_substitution_frame.configure(highlightbackground='#27252c')
+        self.alphabetical_substitution_frame.place(relx=.5, rely=.69, anchor="center")
 
         self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
-        self.exit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.exit_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.exit_button.configure(highlightbackground='#27252c')
-        self.exit_button.place(relx=.5, rely=.29, anchor="center")
+        self.exit_button.place(relx=.5, rely=.80, anchor="center")
 
 
 class BaseFrame(Frame):
@@ -328,6 +335,12 @@ class A1Z26Frame(BaseFrame):
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
         self.submit_button.place(relx=.5, rely=.55, anchor="center")
+
+
+class AlphabeticalSubstitutionFrame(BaseFrame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
+        gui.title("Alphabetical substitution")
 
 
 class GUI(Tk):
