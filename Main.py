@@ -4,6 +4,7 @@ from Tritheme import *
 from Polybius import *
 from Trifid import *
 from A1Z26 import *
+from Alphabetical_Substitution import *
 from tkinter import *
 from tkinter import messagebox
 import tkinter
@@ -341,6 +342,42 @@ class AlphabeticalSubstitutionFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
         gui.title("Alphabetical substitution")
+
+        # Labels
+        self.alphabet = Label(self, text="Alphabet\n(optional)", bg="#27252c")
+        self.alphabet.place(x=30, y=130)
+        self.ciphertext_alphabet = Label(self, text="Ciphertext\nalphabet\n(optional)", bg="#27252c")
+        self.ciphertext_alphabet.place(x=300, y=130)
+
+        # Inputs
+        self.alphabet_input = Entry(self)
+        self.alphabet_input.place(x=105, y=130)
+        self.ciphertext_alphabet_input = Entry(self)
+        self.ciphertext_alphabet_input.place(x=375, y=130)
+
+        def action():
+
+            if self.variable.get() == self.CIPHERS[0]:
+
+                a = alphabetical_substitution_encrypt(self.plain_text_input.get(), self.alphabet_input.get(),
+                                                      self.ciphertext_alphabet_input.get())
+
+                messagebox.showinfo(title="Encrypted text", message=a)
+                AlphabeticalSubstitutionFrame.save(self, a)
+
+            elif self.variable.get() == self.CIPHERS[1]:
+
+                a = alphabetical_substitution_decrypt(self.plain_text_input.get(), self.alphabet_input.get(),
+                                                      self.ciphertext_alphabet_input.get())
+
+                messagebox.showinfo(title="Decrypted text", message=a)
+                AlphabeticalSubstitutionFrame.save(self, a)
+
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
 
 
 class GUI(Tk):
