@@ -121,7 +121,10 @@ class BaseFrame(Frame):
 
     def upload(self):
         path = filedialog.askopenfilename()
-        print(path)
+        
+        with open(path, mode="r", encoding="utf-8") as uploaded_file:
+            uploaded_text = uploaded_file.read()
+            self.plain_text_input.insert(END, uploaded_text)
 
 
 class CaesarFrame(BaseFrame):
