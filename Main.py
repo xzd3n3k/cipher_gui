@@ -450,6 +450,8 @@ class ExperimentalFrame(BaseFrame):
 
                                 messagebox.showinfo(title="Decrypted text", message=msg)
                                 return
+            messagebox.showinfo(title="Decryption not successful",
+                                message="Zadna z techto tri sifer nebyla pouzita k sifraci tohoto textu!!!")
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
