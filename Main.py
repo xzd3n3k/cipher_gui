@@ -400,16 +400,56 @@ class ExperimentalFrame(BaseFrame):
 
         # Whats executed when submit button is clicked
         def action():
+
+            decrypted_texts = []
+
             try:
-                print(polybius_decrypt(self.plain_text_input.get()))
-            except Exception:
-                try:
-                    print(tritheme_decrypt(self.plain_text_input.get()))
-                except Exception:
-                    try:
-                        print(polybius_decrypt(self.plain_text_input.get()))
-                    except Exception:
-                        return "Nebylo mozno desifrovat, pocet vyloucenych sifer: 3, vyloucene sifry: caesar, tritheme, polybius"
+                a = caesar_decrypt(self.plain_text_input.get())
+                decrypted_texts.append(a)
+            except:
+                pass
+            try:
+                a = tritheme_decrypt(self.plain_text_input.get())
+                decrypted_texts.append(a)
+            except:
+                pass
+            try:
+                a = polybius_decrypt(self.plain_text_input.get())
+                decrypted_texts.append(a)
+            except:
+                pass
+
+            with open("txt_files/ceska_slova_databaze.txt", mode="r", encoding="utf-8") as filedict:
+                file = filedict.read()
+                file = file.split()
+
+                for text in decrypted_texts:
+                    match = 0
+                    text = text.split()
+                    fulltext = len(text)
+
+                    for word in text:
+
+                        for wordd in file:
+
+                            if word == wordd:
+                                match += 1
+
+                            if match > (fulltext//2):
+                                msg = ""
+                                limit = fulltext
+
+                                for wrd in text:
+                                    msg += wrd
+                                    limit -= 1
+
+                                    if limit == 0:
+                                        pass
+                                    else:
+                                        msg += " "
+
+                                messagebox.showinfo(title="Decrypted text", message=msg)
+                                return
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())
