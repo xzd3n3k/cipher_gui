@@ -54,10 +54,16 @@ class StartFrame(Frame):
         self.alphabetical_substitution_frame.configure(highlightbackground='#27252c')
         self.alphabetical_substitution_frame.place(relx=.5, rely=.69, anchor="center")
 
-        self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
+        self.experimental_frame = Button(self, text="Experimental function", command=lambda: self.root.change_scene(
+            ExperimentalFrame(root, 600)))
+        self.experimental_frame.config(width=15, fg='black', borderwidth=0, relief=RAISED)
+        self.experimental_frame.configure(highlightbackground='#27252c')
+        self.experimental_frame.place(relx=.5, rely=.80, anchor="center")
+
+        """self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
         self.exit_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.exit_button.configure(highlightbackground='#27252c')
-        self.exit_button.place(relx=.5, rely=.80, anchor="center")
+        self.exit_button.place(relx=.5, rely=.80, anchor="center")"""
 
 
 class BaseFrame(Frame):
@@ -125,7 +131,7 @@ class BaseFrame(Frame):
         if not path:
             messagebox.showinfo(title="FILE ERROR", message="No file selected!!!")
             return
-        
+
         with open(path, mode="r", encoding="utf-8") as uploaded_file:
             uploaded_text = uploaded_file.read()
             self.plain_text_input.insert(END, uploaded_text)
@@ -379,6 +385,31 @@ class AlphabeticalSubstitutionFrame(BaseFrame):
 
                 messagebox.showinfo(title="Decrypted text", message=a)
                 AlphabeticalSubstitutionFrame.save(self, a)
+
+        # Buttons
+        self.submit_button = Button(self, text="Submit", command=lambda: action())
+        self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
+        self.submit_button.configure(highlightbackground='#27252c')
+        self.submit_button.place(relx=.5, rely=.55, anchor="center")
+
+
+class ExperimentalFrame(BaseFrame):
+    def __init__(self, root, height):
+        super().__init__(root, height=height)
+        gui.title("Experimental function")
+
+        # Whats executed when submit button is clicked
+        def action():
+            try:
+                print(polybius_decrypt(self.plain_text_input.get()))
+            except Exception:
+                try:
+                    print(tritheme_decrypt(self.plain_text_input.get()))
+                except Exception:
+                    try:
+                        print(polybius_decrypt(self.plain_text_input.get()))
+                    except Exception:
+                        return "Nebylo mozno desifrovat, pocet vyloucenych sifer: 3, vyloucene sifry: caesar, tritheme, polybius"
 
         # Buttons
         self.submit_button = Button(self, text="Submit", command=lambda: action())

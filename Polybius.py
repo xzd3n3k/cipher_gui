@@ -49,7 +49,6 @@ def polybius_decrypt(text):
 
         if character not in "0123456789":
             decrypted_text += character
-            print(character, "char")
 
         else:
             b += character
