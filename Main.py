@@ -21,7 +21,7 @@ class StartFrame(Frame):
             CaesarFrame(root, 600)))
         self.caesar_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.caesar_button.configure(highlightbackground='#27252c')
-        self.caesar_button.place(relx=.5, rely=.14, anchor="center")
+        self.caesar_button.place(relx=.5, rely=.15, anchor="center")
 
         self.tritheme_button = Button(self, text="Tritheme", command=lambda: self.root.change_scene(
             TrithemeFrame(root, 600)))
@@ -33,37 +33,37 @@ class StartFrame(Frame):
             PolybiusFrame(root, 600)))
         self.polybius_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.polybius_button.configure(highlightbackground='#27252c')
-        self.polybius_button.place(relx=.5, rely=.36, anchor="center")
+        self.polybius_button.place(relx=.5, rely=.35, anchor="center")
 
         self.trifid_button = Button(self, text="Trifid", command=lambda: self.root.change_scene(
             TrifidFrame(root, 600)))
         self.trifid_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.trifid_button.configure(highlightbackground='#27252c')
-        self.trifid_button.place(relx=.5, rely=.47, anchor="center")
+        self.trifid_button.place(relx=.5, rely=.45, anchor="center")
 
         self.a1z26_frame = Button(self, text="A1Z26", command=lambda: self.root.change_scene(
             A1Z26Frame(root, 600)))
         self.a1z26_frame.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.a1z26_frame.configure(highlightbackground='#27252c')
-        self.a1z26_frame.place(relx=.5, rely=.58, anchor="center")
+        self.a1z26_frame.place(relx=.5, rely=.55, anchor="center")
 
         self.alphabetical_substitution_frame = Button(
             self, text="Alphabetical substitution", command=lambda: self.root.change_scene(
                 AlphabeticalSubstitutionFrame(root, 600)))
         self.alphabetical_substitution_frame.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.alphabetical_substitution_frame.configure(highlightbackground='#27252c')
-        self.alphabetical_substitution_frame.place(relx=.5, rely=.69, anchor="center")
+        self.alphabetical_substitution_frame.place(relx=.5, rely=.65, anchor="center")
 
         self.experimental_frame = Button(self, text="Experimental function", command=lambda: self.root.change_scene(
             ExperimentalFrame(root, 600)))
         self.experimental_frame.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.experimental_frame.configure(highlightbackground='#27252c')
-        self.experimental_frame.place(relx=.5, rely=.80, anchor="center")
+        self.experimental_frame.place(relx=.5, rely=.75, anchor="center")
 
-        """self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
+        self.exit_button = Button(self, text="Exit", command=lambda: self.quit())
         self.exit_button.config(width=15, fg='black', borderwidth=0, relief=RAISED)
         self.exit_button.configure(highlightbackground='#27252c')
-        self.exit_button.place(relx=.5, rely=.80, anchor="center")"""
+        self.exit_button.place(relx=.5, rely=.85, anchor="center")
 
 
 class BaseFrame(Frame):
