@@ -76,7 +76,7 @@ class BaseFrame(Frame):
         self.choose_cipher.place(x=30, y=50)
         self.plain_text = Label(self, text="Text", bg="#27252c")
         self.plain_text.place(x=30, y=90)
-        self.choice = Label(self, text="Save encrypted text to txt file", bg="#27252c")
+        self.choice = Label(self, text="Save encrypted/decrypted text to txt file", bg="#27252c")
         self.choice.place(x=30, y=170)
         self.file_name = Label(self, text="Enter file name - leave blank if 'No' is selected", bg="#27252c")
         self.file_name.place(x=30, y=210)
@@ -105,7 +105,7 @@ class BaseFrame(Frame):
         self.dropdown_menu2 = OptionMenu(self, self.variable2, *self.choices)
         self.dropdown_menu2.config(fg='black', borderwidth=0, relief=RAISED)
         self.dropdown_menu2.configure(highlightbackground='#27252c')
-        self.dropdown_menu2.place(x=229, y=170)
+        self.dropdown_menu2.place(x=285, y=170)
 
         # Buttons
         self.upload_button = Button(self, text="Upload", command=lambda: self.upload())
@@ -397,6 +397,12 @@ class ExperimentalFrame(BaseFrame):
     def __init__(self, root, height):
         super().__init__(root, height=height)
         gui.title("Experimental function")
+
+        # Labels
+        self.choose_cipher.destroy()
+
+        # OptionMenus
+        self.dropdown_menu.destroy()
 
         # Whats executed when submit button is clicked
         def action():
