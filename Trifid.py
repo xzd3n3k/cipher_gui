@@ -16,6 +16,8 @@ def trifid_encrypt(text, period, key="epsducvwym.zlkxnbtfgorijhaq"):
 
     locations = []
     for letter in text:
+        if letter not in key:
+            return "Invalid characters, please use only characters from your key!"
         location_of_letter = ""
         square_number = 0
 
@@ -111,6 +113,8 @@ def trifid_decrypt(text, key="epsducvwym.zlkxnbtfgorijhaq"):
                 pos += 1
 
     for letter in text:
+        if letter not in key:
+            return "Invalid characters, please use only characters from your key!"
         if letter != " ":
             period += 1
         else:
