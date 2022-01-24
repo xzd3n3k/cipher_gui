@@ -30,10 +30,13 @@ def polybius_encrypt(text):
     encrypted_text = ""
 
     for x in range(len(text)):
-        if text[x] not in "abcdefghijklmnopqrstuvwxyz":
-            encrypted_text += text[x]
+        if text[x] not in "abcdefghijklmnopqrstuvwxyz ":
+            return "Used incorrect characters, try again!"
         else:
-            encrypted_text += dictionary[text[x]]
+            if text[x] == " ":
+                encrypted_text += text[x]
+            else:
+                encrypted_text += dictionary[text[x]]
 
     return encrypted_text
 
@@ -47,15 +50,18 @@ def polybius_decrypt(text):
 
     for character in text:
 
-        if character not in "0123456789":
-            decrypted_text += character
+        if character not in "0123456789w ":
+            return "Used incorrect characters, try again!"
 
         else:
-            b += character
-            a += 1
+            if character == " " or character == "w":
+                decrypted_text += character
+            else:
+                b += character
+                a += 1
 
-            if ((a % 2) == 0) & (a != 0):
-                decrypted_text += key_list[value_list.index(b)]
-                b = ""
+                if ((a % 2) == 0) & (a != 0):
+                    decrypted_text += key_list[value_list.index(b)]
+                    b = ""
 
     return decrypted_text
