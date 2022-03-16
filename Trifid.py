@@ -2,6 +2,9 @@ def trifid_encrypt(text, period, key="epsducvwym.zlkxnbtfgorijhaq"):
     if key == "":
         key = "epsducvwym.zlkxnbtfgorijhaq"
 
+    if len(key) != 27:
+        return "Key len not correct!"
+
     encrypted_text = ""
     text = text.lower()
     key = key.lower()
