@@ -391,6 +391,7 @@ class AlphabeticalSubstitutionFrame(BaseFrame):
         self.submit_button.config(width=10, fg='black', borderwidth=0, relief=RAISED)
         self.submit_button.configure(highlightbackground='#27252c')
         self.submit_button.place(relx=.5, rely=.55, anchor="center")
+        self.dropdown_menu2.place(x=375, y=170)
 
 
 class ExperimentalFrame(BaseFrame):
