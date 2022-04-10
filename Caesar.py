@@ -32,8 +32,10 @@ def caesar_decrypt(text, shift=0):
     text = text.lower()
 
     with open("txt_files/ceska_slova_databaze.txt", mode="r", encoding="utf-8") as filedict:
-        dictionary = filedict.read()
-        dictionary = dictionary.split()
+        # dictionary = filedict.read()
+        # dictionary = dictionary.split()
+        dictionary = set(filedict.read().split())
+        print(type(dictionary))
         match = 0
         words_from_text = "ahoj"
         limit = 0
@@ -69,19 +71,24 @@ def caesar_decrypt(text, shift=0):
 
             for word in words_from_text:
 
-                a = dictionary.count(word)
-
-                if a > 0:
+                # a = dictionary.count(word)
+                if word in dictionary:
                     match += 1
                     match_words.append(word)
+
+                # if a > 0:
+                #     match += 1
+                #     match_words.append(word)
 
     extension = []
 
     for word in words_from_text:
-        a = dictionary.count(word)
-
-        if a == 0 and len(word) > 2:
+        # a = dictionary.count(word)
+        if word not in dictionary and len(word) > 2:
             extension.append(word)
+
+        # if a == 0 and len(word) > 2:
+        #     extension.append(word)
 
     if len(extension) > 0:
         with open("txt_files/dictionary_extension.txt", mode="w", encoding="utf-8") as file2:
