@@ -35,7 +35,7 @@ def caesar_decrypt(text, shift=0):
         # dictionary = filedict.read()
         # dictionary = dictionary.split()
         dictionary = set(filedict.read().split())
-        print(type(dictionary))
+
         match = 0
         words_from_text = "ahoj"
         limit = 0
