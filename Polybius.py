@@ -54,14 +54,17 @@ def polybius_decrypt(text):
             return "Used incorrect characters, try again!"
 
         else:
-            if character == " " or character == "w":
-                decrypted_text += character
-            else:
-                b += character
-                a += 1
+            try:
+                if character == " " or character == "w":
+                    decrypted_text += character
+                else:
+                    b += character
+                    a += 1
 
-                if ((a % 2) == 0) & (a != 0):
-                    decrypted_text += key_list[value_list.index(b)]
-                    b = ""
+                    if ((a % 2) == 0) & (a != 0):
+                        decrypted_text += key_list[value_list.index(b)]
+                        b = ""
+            except ValueError:
+                return "Program nebyl schopen text desifrovat, pravdepodobne je text sifrovan v jine sifre nebo je to nahodne uskupeni cislic"
 
     return decrypted_text
