@@ -426,6 +426,11 @@ class ExperimentalFrame(BaseFrame):
             except:
                 pass
 
+            errors = ["Used incorrect characters, try again!", "Program nebyl schopen text desifrovat, pravdepodobne je text sifrovan v jine sifre nebo je to nahodne uskupeni cislic", "Program s jistotou nemohl desifrovat text, prosim pouzijte Decrypt with all options"]
+            for text in decrypted_texts:
+                if text in errors:
+                    decrypted_texts.remove(text)
+
             with open("txt_files/ceska_slova_databaze.txt", mode="r", encoding="utf-8") as filedict:
                 file = filedict.read()
                 file = file.split()
