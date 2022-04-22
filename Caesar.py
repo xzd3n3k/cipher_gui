@@ -85,6 +85,11 @@ def caesar_decrypt(text, shift=0):
                 file2.write(word)
                 file2.write("\n")
 
+    with open("txt_files/ceska_slova_databaze.txt", mode="a", encoding="utf-8") as filedict:
+        for word in extension:
+            filedict.write(word)
+            filedict.write("\n")
+
     return decrypted_text
 
 
